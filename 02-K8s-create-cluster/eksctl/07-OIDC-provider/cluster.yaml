@@ -6,11 +6,12 @@ metadata:
   region: us-east-1
   version: "1.21"
 
+iam:
+  withOIDC: true
+
 managedNodeGroups:
   - name: eks-node-group
     instanceType: t2.medium
     desiredCapacity: 1
-    iam:
-      withOIDC: true
     ssh: # import public key from file
       publicKeyPath: mykey.pub

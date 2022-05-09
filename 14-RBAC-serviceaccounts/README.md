@@ -59,12 +59,13 @@ kubectl apply -f aws-auth.yaml
 ```
 
 
-#### Issue the following command to source the rbac-user’s AWS IAM user environmental variables:
+#### Issue the following command to source the dev’s AWS IAM user environmental variables:
 
 ```
 source dev_creds.sh
 
-aws eks update-kubeconfig --region us-east-1 --name eks-cluster
+# Not required
+# aws eks update-kubeconfig --region us-east-1 --name eks-cluster
 
 
 
@@ -78,9 +79,31 @@ aws sts get-caller-identity
 
 ```
 
+#### Now that we’re making calls in the context of the dev, lets quickly make a request to get all pods:
+
+```
+kubectl get pods
+
+```
+
+#### As mentioned earlier, we have our new user dev, but its not yet bound to any roles. In order to do that, we’ll need to switch back to our default admin user.
+
+```
+unset AWS_SECRET_ACCESS_KEY
+unset AWS_ACCESS_KEY_ID
+
+```
+
+#### To verify we’re the admin user again
+
+```
+aws sts get-caller-identity
+
+```
 
 # Now that we’re the admin user again, we’ll create a role called pod-reader that provides list, get, and watch access for pods and deployments, but only for the rbac-test namespace. Run the following to create this role:
 
+```
 
 cat << EoF > rbacuser-role.yaml
 kind: Role
@@ -97,6 +120,11 @@ rules:
   verbs: ["get", "list", "watch"]
 EoF
 
+```
+
+#### We have the user, we have the role, and now we’re bind them together with a RoleBinding resource. Run the following to create this RoleBinding:
+
+```
 
 cat << EoF > rbacuser-role-binding.yaml
 kind: RoleBinding
@@ -114,11 +142,27 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EoF
 
+```
 
+#### Next, we apply the Role, and RoleBindings we created:
 
-cat << EoF >> aws-auth.yaml
-data:
-  mapRoles: |
-    - userarn: arn:aws:iam::${ACCOUNT_ID}:user/dev
-      username: rbac-user
-EoF
+```
+kubectl apply -f rbacuser-role.yaml
+kubectl apply -f rbacuser-role-binding.yaml
+
+```
+
+#### To switch back to rbac-user, issue the following command that sources the dev env vars, and verifies they’ve taken:
+
+```
+source dev_creds.sh; aws sts get-caller-identity
+
+```
+
+#### As dev, issue the following to get pods
+
+```
+
+kubectl get pods
+
+```
