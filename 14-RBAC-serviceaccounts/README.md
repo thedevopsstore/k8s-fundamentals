@@ -43,7 +43,7 @@ cat << EoF >> aws-auth.yaml
 data:
   mapUsers: |
     - userarn: arn:aws:iam::${ACCOUNT_ID}:user/dev
-      username: rbac-user
+      username: dev
 EoF
 
 
