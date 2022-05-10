@@ -166,3 +166,77 @@ source dev_creds.sh; aws sts get-caller-identity
 kubectl get pods
 
 ```
+
+## MAP Roles or RBAC for a role
+
+### Authorize the iam role to access the cluster by updating the role in aws-auth configmap
+
+```
+# update the below group in aws-auth configmap
+
+    - groups:
+      - integrations
+      rolearn: arn:aws:iam::804263606815:role/ec2_ssm_role ## or the role you want to add
+      username: integrations
+
+```
+
+```
+
+# Create role and role binding to allow this role to access the pods in default namespace
+
+cat << EOF | kubectl apply -f -
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: integ-role
+rules:
+  - apiGroups:
+      - ""
+      - "apps"
+      - "batch"
+      - "extensions"
+    resources:
+      - "configmaps"
+      - "cronjobs"
+      - "deployments"
+      - "events"
+      - "ingresses"
+      - "jobs"
+      - "pods"
+      - "pods/attach"
+      - "pods/exec"
+      - "pods/log"
+      - "pods/portforward"
+      - "secrets"
+      - "services"
+    verbs:
+      - "create"
+      - "delete"
+      - "describe"
+      - "get"
+      - "list"
+      - "patch"
+      - "update"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: integ-role-binding
+subjects:
+- kind: Group
+  name: integrations
+roleRef:
+  kind: Role
+  name: integ-role
+  apiGroup: rbac.authorization.k8s.io
+EOF
+
+```
+
+### Trying accessing the pods
+
+```
+kubectl get pods
+
+```
