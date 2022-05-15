@@ -14,7 +14,8 @@ https://kubernetes.io/docs/reference/kubectl/cheatsheet/#interacting-with-runnin
 
 ##### Inorder to view metrics about resources usage of our pods and containers, We need an add-on to collect and provide that data, and one such add on is Kubernetes Metrics server
 
-### Install Kubernetes Metrics Server.
+
+#### install metrics server
 
 ```
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -25,7 +26,6 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 ```
 kubectl get deployment metrics-server -n kube-system
-
 ```
 
 #### Example output:
@@ -36,13 +36,24 @@ metrics-server   1/1     1            1           6m
 
 ```
 
+#### Once the metrics server is installed, deploy an app and monitor the usage of the pod
+
+```
+kubectl apply -f kube-manifests/myapp-deployment.yml
+```
 
 #### kubectl top
 With kubectl top, you can view data about resource usage in your pods and nodes.
-, you can view data about also supports flags like and --sort-by and --selector
+you can view data about also supports flags like and --sort-by and --selector
 
 ```
 kubectl top pod --sort-by <JSONPATH> --selector <selector>
 
 ```
 
+```
+kubectl top pods
+
+kubectl top pods --sort-by=cpu
+
+kubectl top pods --selector app=myapp
