@@ -18,6 +18,13 @@ spec:
           image: lwplapbs/ubuntu-nginx:latest
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 2Gi
 ---
 apiVersion: v1
 kind: Service

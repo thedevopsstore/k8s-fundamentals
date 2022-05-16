@@ -57,3 +57,26 @@ kubectl top pods
 kubectl top pods --sort-by=cpu
 
 kubectl top pods --selector app=myapp
+```
+
+## Managing container resources
+
+### Relevant Documentation
+
+#### Resource Requests and Limits
+
+https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container
+
+#### Resource requests
+
+Resource requests allow you to define amount or resource ( CPU and Memory ) you expect the container to use.
+The kubernetes scheduler will you resource requests to avoid scheduling the pods on nodes which do not have enough resources
+
+**Note** : Resource request does not mean the container or pod cannot use more than requested resources, it is only used for scheduling
+
+#### Resource Limits
+
+Resource limits provide a way to limit the amount of resources your container can use, the kubelet enforces those limits so that the running container is not allowed to use more of that resource than the limit you set
+
+
+
