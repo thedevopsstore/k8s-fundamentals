@@ -15,7 +15,7 @@ spec:
     spec:
       containers: # List
         - name: myapp2-container
-          image: lwplapbs/ubuntu-nginx:2
+          image: lwplapbs/myapp2
           ports:
             - containerPort: 80
           resources:
@@ -43,9 +43,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: myapp1
+  annotations:
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: "mysites2.lwplabs.com"
+  - host: "lwplabs.sites.team"
     http:
       paths:
       - path: "/"

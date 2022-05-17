@@ -31,29 +31,10 @@ kind: Service
 metadata:
   name: myapp1-service
 spec:
-  type: ClusterIP 
+  type: LoadBalancer
   selector: 
     app: myapp1
   ports: 
     - name: http
       port: 80
       targetPort: 80
----      
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: myapp1
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-  - host: "lwplabs.org"
-    http:
-      paths:
-      - path: "/"
-        pathType: Prefix
-        backend:
-          service:
-            name: myapp1-service
-            port:
-              number: 80

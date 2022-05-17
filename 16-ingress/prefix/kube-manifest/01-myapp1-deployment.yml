@@ -15,7 +15,7 @@ spec:
     spec:
       containers: # List
         - name: myapp1-container
-          image: lwplapbs/ubuntu-nginx:1
+          image: lwplapbs/myapp1
           ports:
             - containerPort: 80
           resources:
