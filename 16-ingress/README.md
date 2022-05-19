@@ -38,5 +38,17 @@ ingress-nginx-controller-admission   ClusterIP      10.100.98.248    <none>     
 ```
 
 
+### Ingress using Nodeport for ALB
+
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace \
+    --set controller.service.type=NodePort
+
+kubectl get svc -n ingress-nginx
+
+
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --set controller.service.type=NodePort,controller.service.nodePorts.http=32500
+
+
+
 
 

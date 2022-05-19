@@ -6,8 +6,8 @@ metadata:
   region: us-east-1
   version: "1.21"
 
-iam:
-  withOIDC: true
+#iam:
+#  withOIDC: true
 
 managedNodeGroups:
   - name: eks-node-group
