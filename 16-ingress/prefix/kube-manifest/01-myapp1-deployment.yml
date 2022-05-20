@@ -15,7 +15,7 @@ spec:
     spec:
       containers: # List
         - name: myapp1-container
-          image: lwplapbs/myapp1
+          image: lwplapbs/myapp:1
           ports:
             - containerPort: 80
           resources:
