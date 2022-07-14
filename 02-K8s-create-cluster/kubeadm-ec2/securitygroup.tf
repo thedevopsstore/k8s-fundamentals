@@ -1,5 +1,5 @@
 resource "aws_security_group" "allow-ssh" {
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.aws_vpc.default.id
   name        = "allow-ssh"
   description = "security group that allows ssh and all egress traffic"
   egress {
@@ -27,7 +27,7 @@ resource "aws_security_group" "allow-ssh" {
 }
 
 resource "aws_security_group" "Demo-kube-mutual-sg" {
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.aws_vpc.default.id
   name = "kube-mutual-sec-group-for-Demo"
   tags = {
     Name = "kube-mutual-secgroup"
@@ -35,7 +35,7 @@ resource "aws_security_group" "Demo-kube-mutual-sg" {
 }
 
 resource "aws_security_group" "Demo-kube-worker-sg" {
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.aws_vpc.default.id
   name = "kube-worker-sec-group-for-Demo"
   ingress {
     protocol = "tcp"
@@ -73,7 +73,7 @@ resource "aws_security_group" "Demo-kube-worker-sg" {
 }
 
 resource "aws_security_group" "Demo-kube-master-sg" {
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.aws_vpc.default.id
   name = "kube-master-sec-group-for-Demo"
   ingress {
     protocol = "tcp"

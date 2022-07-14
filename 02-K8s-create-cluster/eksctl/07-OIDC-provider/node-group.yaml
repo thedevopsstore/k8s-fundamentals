@@ -8,6 +8,6 @@ metadata:
 managedNodeGroups:
   - name: eks-prod-group
     instanceType: t2.medium
-    desiredCapacity: 2
+    desiredCapacity: 1
     ssh: # import public key from file
       publicKeyPath: mykey.pub
