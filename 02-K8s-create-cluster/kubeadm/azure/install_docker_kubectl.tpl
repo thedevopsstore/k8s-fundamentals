@@ -43,8 +43,8 @@ sudo apt-get update -y
 #sudo apt-get install -y kubernetes-cni nfs-common
 
 
-sudo sysctl net.bridge.bridge-nf-call-iptables=1
-sudo swapoff -a
+#sudo sysctl net.bridge.bridge-nf-call-iptables=1
+#sudo swapoff -a
 
 #sudo rm -rf /var/lib/kubelet/*
 
