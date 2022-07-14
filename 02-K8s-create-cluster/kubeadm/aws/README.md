@@ -33,7 +33,7 @@ Worker Node
 ```
 git clone https://github.com/thedevopsstore/k8s-fundamentals.git
 
-cd 02-K8s-create-cluster/kubeadm-ec2
+cd 02-K8s-create-cluster/kubeadm/aws
 
 terraform init
 
