@@ -1,3 +1,8 @@
+Create Resource Group
+
+
+az group create -l westus3 -n <MyResourceGroup>
+
 Create an AKS Cluster
 
 az aks create \
