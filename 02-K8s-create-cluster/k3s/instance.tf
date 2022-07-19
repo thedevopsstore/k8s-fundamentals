@@ -4,32 +4,10 @@ locals {
   region = var.AWS_REGION
 }
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "3.14.0"
-  # insert the 23 required variables here
-
-
-  name = "k8s-cluster"
-  cidr = "10.0.0.0/16"
-
-  azs             = ["${local.region}a", "${local.region}b"]
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
-  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24"]
-
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-
-  public_subnet_tags = {
-    Name = "overridden-name-public"
-  }
-
-  tags = {
-    created       =   "terraform"
-    Name          =  "k8s-cluster"
-  }
-
+data "aws_vpc" "default" {
+  default = true
 }
+  
 
 
 
@@ -40,7 +18,7 @@ resource "aws_instance" "node" {
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
   # the VPC subnet
-  subnet_id = module.vpc.public_subnets[0]
+  #subnet_id = module.vpc.public_subnets[0]
 
   # the security group
   vpc_security_group_ids = [aws_security_group.k3s-sec-grp.id]

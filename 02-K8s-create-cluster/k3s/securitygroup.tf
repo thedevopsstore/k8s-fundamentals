@@ -1,5 +1,5 @@
 resource "aws_security_group" "k3s-sec-grp" {
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.aws_vpc.default.id
   name        = "allow-ssh"
   description = "security group that allows ssh and all egress traffic"
   egress {
