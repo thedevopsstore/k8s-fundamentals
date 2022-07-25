@@ -36,3 +36,13 @@ kubectl get nodes -o wide
 Get cluster information
 
 kubectl cluster-info
+
+
+### Delete Cluster
+
+```
+az aks delete --name Cluster01 --resource-group lwplabs --no-wait --yes
+az group delete --name lwplabs
+```
+
+
