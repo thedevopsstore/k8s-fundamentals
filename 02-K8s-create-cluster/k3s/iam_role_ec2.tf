@@ -33,6 +33,6 @@ resource "aws_iam_instance_profile" "ec2_profile" {
 
 resource "aws_iam_policy_attachment" "policy-attach" {
   name       = "policy-attachment"
-  roles      = [aws_iam_role.ec2_ssmrole.name]
+  roles      = [aws_iam_role.ec2_ssm_role.name]
   policy_arn = data.aws_iam_policy.ssmpolicy.arn
 }

@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
       - name: my-helloworld-app
-        image: hello-world
+        image: nginx
