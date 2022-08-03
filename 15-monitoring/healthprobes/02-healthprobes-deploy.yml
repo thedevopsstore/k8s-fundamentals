@@ -27,7 +27,7 @@ spec:
               memory: 2Gi
           livenessProbe:
             httpGet:
-              path: /tech/status.html
+              path: /tech/index.html
               port : 80
             initialDelaySeconds: 5
             periodSeconds: 5
