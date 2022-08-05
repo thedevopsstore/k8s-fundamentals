@@ -19,10 +19,15 @@ spec:
         app.kubernetes.io/name: wordpress
         app.kubernetes.io/instance: dev-wordpress
     spec:
+      securityContext:
+        fsGroup: 1001
       containers:
         - name: wordpress
           image: docker.io/bitnami/wordpress:5.9.2-debian-10-r9
           imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
           env:
             - name: BITNAMI_DEBUG
               value: "false"
