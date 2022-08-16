@@ -8,7 +8,7 @@
 
 ### Installing the Prometheus stack using Helm charts
 
-** Ref : https://github.com/prometheus-community/helm-charts/ **
+**Ref : https://github.com/prometheus-community/helm-charts/**
 
 #### Add the repo in your workstation
 
