@@ -1,6 +1,6 @@
 # Kubernetes Monitoring Using Prometheus Stack
 
->> The Stack inludes the following
+> The Stack inludes the following
 
 - Promethues
 - Grafana
@@ -12,7 +12,7 @@
 
 #### Add the repo in your workstation
 
->> Pre-requites :
+> Pre-requites :
 - Kubernetes Cluster
 - helm cli installed
 - smtp server details if you need alert Manager configured
