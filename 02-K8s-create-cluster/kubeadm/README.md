@@ -105,7 +105,7 @@ kubeadm join 10.0.101.50:6443 --token u4br39.6eucsm3t4l7icyno \
 ```
 # installing calico driver
 
-curl https://docs.projectcalico.org/manifests/calico.yaml -O
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml -O
 
 kubectl apply -f calico.yaml
 
